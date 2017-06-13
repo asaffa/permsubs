@@ -5,7 +5,7 @@ numpy, scipy, pandas, tables, IPython
 
 # Usage
 ## 1. Permutations
-Generate permutations of omics data matrix by random shuffling of cases and controls (samples in columns) and performing unpaired, equal variance t-tests for each probe measurement (rows). Originally written to permute DNA methylation data in the form of a matrix of M-values (.csv) and untested with other data types.
+
 ### arguments: 
 num_cores num_perms batch_size chunk_size input_csv output_h5_file
 
