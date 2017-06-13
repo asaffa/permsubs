@@ -44,22 +44,9 @@ def rand_perm(i, df, rel):
     logger.info(df.loc["case-control",:]) 
     logger.info("Dataframe dimensions: %i rows by %i columns" %(
     len(df.index), len(df.columns)))
-
-    #data paired (related samples) -> shuffle labelling within pairs
-    if rel == True:
-        #labels = list(df.ix["case-control", 0:2])
-        labels = [1,0]
-        n_labels = len(list(df.loc["case-control", :]))
-        all_perms = []
-        for i in range(0,int(nperms)):
-            temp_perm = []
-            for i in range(0, n_labels / 2):
-                random.shuffle(labels)
-                temp_perm = temp_perm + labels
-            all_perms.append([bool(item) for item in temp_perm])
             
     #unpaired -> randomly assign labels by individual
-    elif rel == False:
+    if rel == False:
         labels = list(df.loc["case-control", :])
         all_perms = []
         for i in range(0, int(nperms)):
@@ -72,14 +59,6 @@ def rand_perm(i, df, rel):
     logger.info("%i random permutations performed, of which %i are unique" %(
     int(nperms), len(unique)))
     return all_perms
-
-#select type of t-test to be performed
-def ttest_selector(rel, var):
-    if rel == True:
-        t = "sp.ttest_rel(cases,controls,0)"
-    else:
-        t = "sp.ttest_ind(cases,controls,0,{})".format(var)
-    return t
 
 #perform for every probe in every permutation
 def mp_ttest_probes_in_perm(t):
@@ -111,7 +90,7 @@ def mp_ttest_probes_in_perm(t):
     return pval
 
 def mp_write_results(r, c, n):
-        #get individual results back from pooled results
+    #get individual results back from pooled results
     start = time.time()
     
     #num probes
@@ -200,9 +179,6 @@ def main():
     parser.add_argument("chunksz", type = int)
     parser.add_argument("inputcsv")
     parser.add_argument("outputh5")
-    #NOT IMPLEMENTED
-    #parser.add_argument("relsamp", type = int)
-    #parser.add_argument("equalvar", type = int)
     args = parser.parse_args()
 
     start = time.time()
@@ -211,12 +187,6 @@ def main():
     mp_meth_df = mp_meth_df.get_chunk()
     logger.info("First row of data (sorted by column/sample name) : ")
     logger.info(mp_meth_df.head(1))
-    #NOT IMPLEMENTED
-    #select type of t-test to use
-    #args.relsamp = bool(args.relsamp)
-    #args.equalvar = bool(args.equalvar)
-    #ttest = ttest_selector(args.relsamp,args.equalvar)
-    #logger.info("Type of t-test used: %s" %(ttest))
     
     #generate permutations
     all_perms = rand_perm(args.numperms,mp_meth_df,False)
@@ -236,11 +206,10 @@ def main():
     logger.info("permutations batch size: {c}".format(c = inc))
     
     mp_meth_df = load_data(args.inputcsv,args.chunksz)
+    
     for chunk in mp_meth_df:
         row_names = chunk.index.tolist()
         mp_meth_matrix = chunk.iloc[:,:].values
-        #convert beta to m values
-        mp_meth_matrix = np.log2((mp_meth_matrix / (1 - mp_meth_matrix)))
         logger.info("Dataframe dimensions: %i rows by %i columns" %(
         len(chunk.index),len(chunk.columns)))
         logger.warn('Free memory after loading data: {m} MB'.format(m = free_memory()))    
@@ -265,16 +234,8 @@ def main():
                                     m = free_memory())) 
             print("hd5 node: %s" %(hdf_node))
             store.append(hdf_node, pvals_tab, min_itemsize={ 'index' : 20 })
-            #if "%s%s" % ('/',hdf_node) not in store.keys():  
-            #    store.put(hdf_node,pvals_tab,format="table")
-            #else:
-            #    store.append(hdf_node, pvals_tab, min_itemsize={ 'index' : 200 })
             logger.warn('Free memory after writing results to h5 file: {m} MB'.format(
                                     m = free_memory())) 
-            #cleanup
-            #del pvals_tab
-            #del p_results
-            #del task_list
             gc.collect()
     
     #close hdf data store
