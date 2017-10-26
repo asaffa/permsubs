@@ -1,3 +1,22 @@
+print("""
+#/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+#
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+# author. Ayden Saffari <asaffa01@mail.bbk.ac.uk>  
+# affiliations. Dept. of Psychology, Birkbeck, University of London
+#               Dept. of NCD Epidemiology, London School of Hygiene and Tropical Medicine
+#               MRC International Nutrition Group
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+# Permutation analysis of methylation data
+# 1. Permutation procedure
+#
+# description: randomly permutes phenotype labels of subjects, performs t-tests, 
+#              stores absolute t vals for all probes in each permutation
+#
+#input: matrix of DNA methylation M-values
+#output: HDF5 file containing the results
+#/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+""")
 import sys
 import os
 import subprocess
