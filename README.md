@@ -1,6 +1,6 @@
 # Description
-Python command-line tools for performing simulation extrapolation using EWAS DNA methylation array data (M-values) 
-for the purpose of estimating a genome-wide significance threshold: http://onlinelibrary.wiley.com/doi/10.1002/gepi.22086/abstract 
+Python command-line tools for performing simulation extrapolation using DNA methylation array data (M-values) 
+for the purpose of estimating a genome-wide significance threshold for EWAS: http://onlinelibrary.wiley.com/doi/10.1002/gepi.22086/abstract 
 
 1. Permutations - permute case control labels and perform t-tests across all measured probes, return absolute t values, store in HDF5 compressed file
 2. Subsampling - for each permutation, sample from distribution of calculated p values for range of sampling proportions (0.1 to 1) and record the minimum p for each. Next, calculate 5% point for each density across all permutations, repeat in order to obtain mean 5% value for each density across all permutations.
