@@ -2,10 +2,7 @@ print("""
 #/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
 #
 #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-# author. Ayden Saffari <asaffa01@mail.bbk.ac.uk>  
-# affiliations. Dept. of Psychology, Birkbeck, University of London
-#               Dept. of NCD Epidemiology, London School of Hygiene and Tropical Medicine
-#               MRC International Nutrition Group
+# author. github/asaffa
 #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 # Permutation analysis of methylation data
 # 1. Permutation procedure
